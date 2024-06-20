@@ -1,0 +1,40 @@
+def backtrack(r,col,posdig,negdig,res,board):
+    if r>=n-1:
+        l=["".join(i) for i in board]
+        res.append(l)
+        return res
+    for c in range(n):
+        if c in col or (r+c) in posdig or (r-c) in negdig:
+            continue
+        board[r][c]="Q"
+        col.append(c)
+        posdig.append(r+c)
+        negdig.append(r-c)
+
+        backtrack(r+1,col,posdig,negdig,res,board)
+
+        board[r][c]="_  "
+                
+        col.remove(c)
+        posdig.remove(r+c)
+        negdig.remove(r-c)
+res=[]
+col=[]
+row=[]
+posdig=[]
+negdig=[]
+n=6
+board=[["_  "]*n for i in range(n)]
+board[0][5]="R"
+col=[5]
+row=[0]
+posdig=[0+5]
+negdig=[0-5]
+backtrack(1,col,posdig,negdig,res,board)
+for i in res:
+    for j in i:
+        print(j)
+    print()
+    print()
+
+
